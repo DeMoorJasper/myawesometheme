@@ -33,7 +33,7 @@ do
 end
 
 --- Variable definitions ---
-local chosen_theme = "dremora"
+local chosen_theme = "copland"
 local modkey       = "Mod4"
 local terminal     = "x-terminal-emulator"
 local editor       = os.getenv("EDITOR") or "nano"
