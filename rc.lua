@@ -109,7 +109,7 @@ awful.util.tasklist_buttons = awful.util.table.join(
                                               awful.client.focus.byidx(-1)
                                           end))
 
-local theme_path = string.format("%s/.config/awesome/theme/theme.lua", os.getenv("HOME"), "theme")
+local theme_path = string.format("%s/.config/awesome/theme/theme.lua", os.getenv("HOME"))
 beautiful.init(theme_path)
 
 --- MENU ---
