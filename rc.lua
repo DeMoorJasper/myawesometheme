@@ -33,7 +33,7 @@ do
 end
 
 --- Variable definitions ---
-local chosen_theme = "multicolo"
+local chosen_theme = "multicolor"
 local modkey       = "Mod4"
 local terminal     = "x-terminal-emulator"
 local editor       = os.getenv("EDITOR") or "nano"
