@@ -1,11 +1,4 @@
-
---[[
-
-     Multicolor Awesome WM theme 2.0
-     github.com/copycat-killer
-
---]]
-
+-- Based of multicolor theme --
 
 local gears = require("gears")
 local lain  = require("lain")
