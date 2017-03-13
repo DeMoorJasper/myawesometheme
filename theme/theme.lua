@@ -87,14 +87,14 @@ local mytextclock = wibox.widget.textclock(markup("#7788af", "%A %d %B ") .. mar
 mytextclock.font = theme.font
 
 -- Calendar
---theme.cal = lain.widget.calendar({
---    attach_to = { mytextclock },
---    notification_preset = {
---        font = "xos4 Terminus 10",
---        fg   = theme.fg_normal,
---        bg   = theme.bg_normal
---    }
---})
+theme.cal = lain.widget.calendar({
+    attach_to = { mytextclock },
+    notification_preset = {
+        font = "xos4 Terminus 10",
+        fg   = theme.fg_normal,
+        bg   = theme.bg_normal
+    }
+})
 
 -- CPU
 local cpuicon = wibox.widget.imagebox(theme.widget_cpu)
@@ -136,12 +136,6 @@ local netdowninfo = wibox.widget.textbox()
 local netupicon = wibox.widget.imagebox(theme.widget_netup)
 local netupinfo = lain.widget.net({
     settings = function()
-        if iface ~= "network off" and
-           string.match(theme.weather.widget.text, "N/A")
-        then
-            theme.weather.update()
-        end
-
         widget:set_markup(markup.fontfg(theme.font, "#e54c62", net_now.sent .. " "))
         netdowninfo:set_markup(markup.fontfg(theme.font, "#87af5f", net_now.received .. " "))
     end
@@ -195,8 +189,6 @@ function theme.at_screen_connect(s)
             --s.mylayoutbox,
             s.mytaglist,
             s.mypromptbox,
-            mpdicon,
-            theme.mpd.widget,
         },
         --s.mytasklist, -- Middle widget
         nil,
@@ -213,7 +205,6 @@ function theme.at_screen_connect(s)
             memory.widget,
             cpuicon,
             cpu.widget,
-            tempicon,
             temp.widget,
             baticon,
             bat.widget,
