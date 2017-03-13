@@ -137,18 +137,17 @@ screen.connect_signal("property::geometry", function(s)
 end)
 
 -- Create a wibox for each screen and add it
--- awful.screen.connect_for_each_screen(function(s) beautiful.at_screen_connect(s) end)
--- }}}
+awful.screen.connect_for_each_screen(function(s) beautiful.at_screen_connect(s) end)
 
--- {{{ Mouse bindings
+
+-- Mouse bindings --
 root.buttons(awful.util.table.join(
     awful.button({ }, 3, function () awful.util.mymainmenu:toggle() end),
     awful.button({ }, 4, awful.tag.viewnext),
     awful.button({ }, 5, awful.tag.viewprev)
 ))
--- }}}
 
--- {{{ Key bindings
+-- Key bindings --
 globalkeys = awful.util.table.join(
     -- Hotkeys
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
@@ -380,13 +379,6 @@ awful.rules.rules = {
     -- Titlebars
     { rule_any = { type = { "dialog", "normal" } },
       properties = { titlebars_enabled = true } },
-
-    -- Set Firefox to always map on the first tag on screen 1.
-    { rule = { class = "Firefox" },
-      properties = { screen = 1, tag = screen[1].tags[1] } },
-
-    { rule = { class = "Gimp", role = "gimp-image-window" },
-          properties = { maximized = true } },
 }
 
 
