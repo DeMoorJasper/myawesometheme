@@ -1,4 +1,5 @@
--- Based of multicolor theme --
+-- Based of multicolor theme
+-- Original author github.com/copycat-killer
 
 local gears = require("gears")
 local lain  = require("lain")
@@ -7,7 +8,7 @@ local wibox = require("wibox")
 local os    = { getenv = os.getenv, setlocale = os.setlocale }
 
 local theme                                     = {}
-theme.confdir                                   = os.getenv("HOME") .. "/.config/awesome/themes/multicolor"
+theme.confdir                                   = os.getenv("HOME") .. "/.config/awesome/theme"
 theme.wallpaper                                 = theme.confdir .. "/wallpaper.png"
 theme.font                                      = "xos4 Terminus 8"
 theme.menu_bg_normal                            = "#000000"
