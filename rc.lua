@@ -33,7 +33,7 @@ do
 end
 
 --- Variable definitions ---
-local chosen_theme = "multicolor"
+local chosen_theme = "holo"
 local modkey       = "Mod4"
 local altkey       = "Mod1"
 local terminal     = "x-terminal-emulator"
