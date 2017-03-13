@@ -115,7 +115,7 @@ beautiful.init(theme_path)
 --- MENU ---
 myawesomemenu = {
    { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awful.util.getdir("config") .. "/rc.lua" },
+   { "edit config", string.format("%s -e %s %s", terminal, editor, awesome.conffile) },
    { "reload", awesome.restart },
    { "lock", terminal .. " -e xscreensaver-command --lock" },
    { "restart", terminal .. " -e sudo shutdown -r now" },
