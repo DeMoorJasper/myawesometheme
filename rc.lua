@@ -135,7 +135,7 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
                                   }
                         })
 
---menubar.utils.terminal = terminal -- Set the Menubar terminal for applications that require it
+menubar.utils.terminal = terminal -- Set the Menubar terminal for applications that require it
 
 --- SCREEN ---
 screen.connect_signal("property::geometry", function(s)
