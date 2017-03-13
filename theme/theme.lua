@@ -95,18 +95,18 @@ local cpu = lain.widget.cpu({
 })
 
 -- Battery
-local baticon = wibox.widget.imagebox(theme.widget_batt)
-local bat = lain.widget.bat({
-    settings = function()
-        local perc = bat_now.perc ~= "N/A" and bat_now.perc .. "%" or bat_now.perc
-
-        if bat_now.ac_status == 1 then
-            perc = perc .. " plug"
-        end
-
-        widget:set_markup(markup.fontfg(theme.font, theme.fg_normal, bat_now.perc .. " "))
-    end
-})
+--local baticon = wibox.widget.imagebox(theme.widget_batt)
+--local bat = lain.widget.bat({
+--    settings = function()
+--        local perc = bat_now.perc ~= "N/A" and bat_now.perc .. "%" or bat_now.perc
+--
+--        if bat_now.ac_status == 1 then
+--            perc = perc .. " plug"
+--        end
+--
+--        widget:set_markup(markup.fontfg(theme.font, theme.fg_normal, bat_now.perc .. " "))
+--    end
+--})
 
 -- ALSA volume
 local volicon = wibox.widget.imagebox(theme.widget_vol)
@@ -195,8 +195,9 @@ function theme.at_screen_connect(s)
             memory.widget,
             cpuicon,
             cpu.widget,
-            baticon,
-            bat.widget,
+            --Uncomment for battery
+            --baticon,
+            --bat.widget,
             clockicon,
             mytextclock,
         },
