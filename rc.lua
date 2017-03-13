@@ -121,7 +121,16 @@ local myawesomemenu = {
     { "quit", function() awesome.quit() end }
 }
 
-mymainmenu = awful.menu({ items = myawesomemenu })
+Applications = {
+    { "Firefox", "nohup firefox" }
+}
+
+mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
+                                    { "Debian", debian.menu.Debian_menu.Debian },
+                                    { "Applications", Applications },
+                                    { "open terminal", terminal }
+                                  }
+                        })
 
 --menubar.utils.terminal = terminal -- Set the Menubar terminal for applications that require it
 
