@@ -13,7 +13,7 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
 local os            = { getenv = os.getenv, setlocale = os.setlocale }
 rootdir             = os.getenv("HOME") .. "/.config/awesome/"
 
-exec(rootdir .. "display-config")
+awesome.exec(rootdir .. "display-config")
 
 --- Error handling ---
 if awesome.startup_errors then
