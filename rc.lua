@@ -9,7 +9,6 @@ local wibox         = require("wibox")
 local beautiful     = require("beautiful")
 local naughty       = require("naughty")
 local menubar       = require("menubar")
-local freedesktop   = require("freedesktop")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 
 --- Error handling ---
@@ -33,7 +32,6 @@ do
 end
 
 --- Variable definitions ---
-local chosen_theme = "multicolor"
 local modkey       = "Mod4"
 local terminal     = "x-terminal-emulator"
 local editor       = os.getenv("EDITOR") or "nano"
@@ -111,7 +109,7 @@ awful.util.tasklist_buttons = awful.util.table.join(
                                               awful.client.focus.byidx(-1)
                                           end))
 
-local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme)
+local theme_path = string.format("%s/.config/awesome/theme/theme.lua", os.getenv("HOME"))
 beautiful.init(theme_path)
 
 --- MENU ---
@@ -123,17 +121,6 @@ local myawesomemenu = {
     { "quit", function() awesome.quit() end }
 }
 
-awful.util.mymainmenu = freedesktop.menu.build({
-    icon_size = beautiful.menu_height or 16,
-    before = {
-        { "Awesome", myawesomemenu, beautiful.awesome_icon },
-        -- other triads can be put here
-    },
-    after = {
-        { "Open terminal", terminal },
-        -- other triads can be put here
-    }
-})
 --menubar.utils.terminal = terminal -- Set the Menubar terminal for applications that require it
 
 --- SCREEN ---
