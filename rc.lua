@@ -317,7 +317,6 @@ clientkeys = awful.util.table.join(                       ),
             c:raise()
         end ,
         {description = "maximize", group = "client"})
-)
 
 -- Bind all key numbers to tags.
 for i = 1, 9 do
