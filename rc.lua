@@ -11,6 +11,9 @@ local naughty       = require("naughty")
 local menubar       = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 local awful_menu = require("awful.menu")
+local menu_gen   = require("menubar.menu_gen")
+local menu_utils = require("menubar.utils")
+local icon_theme = require("menubar.icon_theme")
 
 -- FREEDESKTOP MENUBUILD
 function menubuild(args)
