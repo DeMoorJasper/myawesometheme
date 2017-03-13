@@ -11,6 +11,9 @@ local naughty       = require("naughty")
 local menubar       = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 
+-- Load Debian menu entries
+require("debian.menu")
+
 --- Error handling ---
 if awesome.startup_errors then
     naughty.notify({ preset = naughty.config.presets.critical,
