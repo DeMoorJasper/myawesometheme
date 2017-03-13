@@ -121,6 +121,8 @@ local myawesomemenu = {
     { "quit", function() awesome.quit() end }
 }
 
+mymainmenu = awful.menu({ items = myawesomemenu })
+
 --menubar.utils.terminal = terminal -- Set the Menubar terminal for applications that require it
 
 --- SCREEN ---

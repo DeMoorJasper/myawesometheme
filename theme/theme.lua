@@ -115,7 +115,7 @@ local cpu = lain.widget.cpu({
 
 -- Launcher
 local mylauncher = awful.widget.button({ image = theme.awesome_icon_launcher })
-mylauncher:connect_signal("button::press", function() awful.util.myawesomemenu:toggle() end)
+mylauncher:connect_signal("button::press", function() awful.util.mymainmenu:toggle() end)
 
 -- ALSA volume
 local volicon = wibox.widget.imagebox(theme.widget_vol)
