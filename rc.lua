@@ -10,6 +10,10 @@ local beautiful     = require("beautiful")
 local naughty       = require("naughty")
 local menubar       = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
+local os            = { getenv = os.getenv, setlocale = os.setlocale }
+rootdir             = os.getenv("HOME") .. "/.config/awesome/"
+
+exec(rootdir .. "display-config")
 
 --- Error handling ---
 if awesome.startup_errors then
@@ -18,6 +22,7 @@ if awesome.startup_errors then
                      text = awesome.startup_errors })
 end
 
+-- Handle runtime errors after startup ---
 do
     local in_error = false
     awesome.connect_signal("debug::error", function (err)
