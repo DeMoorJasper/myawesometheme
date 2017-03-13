@@ -185,7 +185,6 @@ function theme.at_screen_connect(s)
             --s.mylayoutbox,
             s.mytaglist,
             s.mypromptbox,
-            mylauncher,
         },
         --s.mytasklist, -- Middle widget
         nil,
@@ -218,6 +217,7 @@ function theme.at_screen_connect(s)
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
+            mylauncher,
         },
         s.mytasklist, -- Middle widget
         { -- Right widgets
