@@ -1,9 +1,9 @@
 
 --[[
-                                                  
-     Licensed under GNU General Public License v2 
-      * (c) 2013, Luke Bonham                     
-                                                  
+
+     Licensed under GNU General Public License v2
+      * (c) 2013, Luke Bonham
+
 --]]
 
 
@@ -23,14 +23,7 @@ helpers.lain_dir    = debug.getinfo(1, 'S').source:match[[^@(.*/).*$]]
 helpers.icons_dir   = helpers.lain_dir .. 'icons/'
 helpers.scripts_dir = helpers.lain_dir .. 'scripts/'
 
--- {{{ Modules loader
 
-function helpers.wrequire(table, key)
-    local module = rawget(table, key)
-    return module or require(table._NAME .. '.' .. key)
-end
-
--- }}}
 
 -- {{{ File operations
 
