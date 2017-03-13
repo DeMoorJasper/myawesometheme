@@ -245,9 +245,6 @@ globalkeys = awful.util.table.join(
               end,
               {description = "restore minimized", group = "client"}),
 
-    -- Dropdown application
-    -- awful.key({ modkey, }, "z", function () awful.screen.focused().quake:toggle() end),
-
     -- Copy primary to clipboard (terminals to gtk)
     awful.key({ modkey }, "c", function () awful.spawn("xsel | xsel -i -b") end),
     -- Copy clipboard to primary (gtk to terminals)
@@ -383,10 +380,6 @@ awful.rules.rules = {
 
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c)
-    -- Set the windows at the slave,
-    -- i.e. put it at the end of others instead of setting it master.
-    -- if not awesome.startup then awful.client.setslave(c) end
-
     if awesome.startup and
       not c.size_hints.user_position
       and not c.size_hints.program_position then

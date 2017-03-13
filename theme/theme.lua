@@ -31,6 +31,8 @@ theme.menu_fg_normal                            = "#aaaaaa"
 theme.menu_fg_focus                             = "#ff8c00"
 theme.menu_bg_normal                            = "#050505dd"
 theme.menu_bg_focus                             = "#050505dd"
+theme.awesome_icon                              = theme.icon_dir .. "/awesome_icon_white.png"
+theme.awesome_icon_launcher                     = theme.icon_dir .. "/awesome_icon.png"
 theme.widget_temp                               = theme.confdir .. "/icons/temp.png"
 theme.widget_cpu                                = theme.confdir .. "/icons/cpu.png"
 theme.widget_mem                                = theme.confdir .. "/icons/mem.png"
@@ -108,6 +110,10 @@ local cpu = lain.widget.cpu({
 --    end
 --})
 
+-- Launcher
+local mylauncher = awful.widget.button({ image = theme.awesome_icon_launcher })
+mylauncher:connect_signal("button::press", function() awful.util.mymainmenu:toggle() end)
+
 -- ALSA volume
 local volicon = wibox.widget.imagebox(theme.widget_vol)
 theme.volume = lain.widget.alsa({
@@ -140,9 +146,6 @@ local memory = lain.widget.mem({
 })
 
 function theme.at_screen_connect(s)
-    -- Quake application
-    -- s.quake = lain.util.quake({ app = awful.util.terminal })
-
     -- If wallpaper is a function, call it with the screen
     if type(theme.wallpaper) == "function" then
         theme.wallpaper = theme.wallpaper(s)
@@ -179,6 +182,7 @@ function theme.at_screen_connect(s)
             --s.mylayoutbox,
             s.mytaglist,
             s.mypromptbox,
+            mylauncher,
         },
         --s.mytasklist, -- Middle widget
         nil,
