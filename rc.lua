@@ -12,7 +12,7 @@ local menubar       = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 
 -- FREEDESKTOP MENUBUILD
-function menu.build(args)
+function menubuild(args)
     local args      = args or {}
     local icon_size = args.icon_size
     local before    = args.before or {}
@@ -183,7 +183,7 @@ Applications = {
     { "Firefox", "nohup firefox" }
 }
 
-awful.util.mymainmenu = menu.build({
+awful.util.mymainmenu = menubuild({
     icon_size = beautiful.menu_height or 16,
     before = {
         { "Awesome", myawesomemenu, beautiful.awesome_icon },
