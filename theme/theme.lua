@@ -205,7 +205,6 @@ function theme.at_screen_connect(s)
             memory.widget,
             cpuicon,
             cpu.widget,
-            temp.widget,
             baticon,
             bat.widget,
             clockicon,
