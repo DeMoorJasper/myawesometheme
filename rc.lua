@@ -10,8 +10,6 @@ local beautiful     = require("beautiful")
 local naughty       = require("naughty")
 local menubar       = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
-local os            = { getenv = os.getenv, setlocale = os.setlocale }
-rootdir             = os.getenv("HOME") .. "/.config/awesome/"
 
 --- Error handling ---
 if awesome.startup_errors then
