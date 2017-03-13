@@ -10,7 +10,7 @@ local os    = { getenv = os.getenv, setlocale = os.setlocale }
 local theme                                     = {}
 theme.confdir                                   = os.getenv("HOME") .. "/.config/awesome/theme"
 theme.wallpaper                                 = theme.confdir .. "/wallpaper.png"
-theme.font                                      = "xos4 Terminus 8"
+theme.font                                      = "Ubuntu"
 theme.menu_bg_normal                            = "#000000"
 theme.menu_bg_focus                             = "#000000"
 theme.bg_normal                                 = "#000000"
