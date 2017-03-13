@@ -141,7 +141,7 @@ local memory = lain.widget.mem({
 
 function theme.at_screen_connect(s)
     -- Quake application
-    s.quake = lain.util.quake({ app = awful.util.terminal })
+    -- s.quake = lain.util.quake({ app = awful.util.terminal })
 
     -- If wallpaper is a function, call it with the screen
     if type(theme.wallpaper) == "function" then
