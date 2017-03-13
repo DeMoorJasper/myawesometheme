@@ -139,7 +139,6 @@ end)
 -- Create a wibox for each screen and add it
 awful.screen.connect_for_each_screen(function(s) beautiful.at_screen_connect(s) end)
 
-
 -- Mouse bindings --
 root.buttons(awful.util.table.join(
     awful.button({ }, 3, function () awful.util.mymainmenu:toggle() end),
@@ -247,7 +246,7 @@ globalkeys = awful.util.table.join(
               {description = "restore minimized", group = "client"}),
 
     -- Dropdown application
-    awful.key({ modkey, }, "z", function () awful.screen.focused().quake:toggle() end),
+    -- awful.key({ modkey, }, "z", function () awful.screen.focused().quake:toggle() end),
 
     -- Copy primary to clipboard (terminals to gtk)
     awful.key({ modkey }, "c", function () awful.spawn("xsel | xsel -i -b") end),
