@@ -11,8 +11,63 @@ local naughty       = require("naughty")
 local menubar       = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 
--- Load Debian menu entries
-require("debian.menu")
+-- FREEDESKTOP MENUBUILD
+function menu.build(args)
+    local args      = args or {}
+    local icon_size = args.icon_size
+    local before    = args.before or {}
+    local after     = args.after or {}
+
+    local result    = {}
+    local _menu     = awful_menu({ items = before })
+
+    menu_gen.generate(function(entries)
+        -- Add category icons
+        for k, v in pairs(menu_gen.all_categories) do
+            table.insert(result, { k, {}, v.icon })
+        end
+
+        -- Get items table
+        for k, v in pairs(entries) do
+            for _, cat in pairs(result) do
+                if cat[1] == v.category then
+                    table.insert(cat[2], { v.name, v.cmdline, v.icon })
+                    break
+                end
+            end
+        end
+
+        -- Cleanup things a bit
+        for i = #result, 1, -1 do
+            local v = result[i]
+            if #v[2] == 0 then
+                -- Remove unused categories
+                table.remove(result, i)
+            else
+                --Sort entries alphabetically (by name)
+                table.sort(v[2], function (a, b) return string.byte(a[1]) < string.byte(b[1]) end)
+                -- Replace category name with nice name
+                v[1] = menu_gen.all_categories[v[1]].name
+            end
+        end
+
+        -- Sort categories alphabetically also
+        table.sort(result, function(a, b) return string.byte(a[1]) < string.byte(b[1]) end)
+
+        -- Add items to menu
+        for _, v in pairs(result) do _menu:add(v) end
+        for _, v in pairs(after)  do _menu:add(v) end
+    end)
+
+    -- Set icon size
+    if icon_size then
+        for _,v in pairs(menu_gen.all_categories) do
+            v.icon = icon_theme():find_icon_path(v.icon_name, icon_size)
+        end
+    end
+
+    return _menu
+end
 
 --- Error handling ---
 if awesome.startup_errors then
@@ -128,12 +183,17 @@ Applications = {
     { "Firefox", "nohup firefox" }
 }
 
-awful.util.mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "Debian", debian.menu.Debian_menu.Debian },
-                                    { "Applications", Applications },
-                                    { "open terminal", terminal }
-                                  }
-                                })
+awful.util.mymainmenu = menu.build({
+    icon_size = beautiful.menu_height or 16,
+    before = {
+        { "Awesome", myawesomemenu, beautiful.awesome_icon },
+        -- other triads can be put here
+    },
+    after = {
+        { "Open terminal", terminal },
+        -- other triads can be put here
+    }
+})
 
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon, menu = awful.util.mymainmenu })
 
