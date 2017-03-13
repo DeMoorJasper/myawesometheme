@@ -133,7 +133,9 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
                                     { "Applications", Applications },
                                     { "open terminal", terminal }
                                   }
-                        })
+                                })
+
+mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon, menu = mymainmenu })
 
 menubar.utils.terminal = terminal -- Set the Menubar terminal for applications that require it
 
