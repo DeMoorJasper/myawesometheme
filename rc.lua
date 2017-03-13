@@ -35,7 +35,6 @@ end
 --- Variable definitions ---
 local chosen_theme = "dremora"
 local modkey       = "Mod4"
-local altkey       = "Mod1"
 local terminal     = "x-terminal-emulator"
 local editor       = os.getenv("EDITOR") or "nano"
 local browser      = "firefox"
@@ -59,12 +58,6 @@ awful.layout.layouts = {
     --awful.layout.suit.corner.ne,
     --awful.layout.suit.corner.sw,
     --awful.layout.suit.corner.se,
-    --lain.layout.cascade,
-    --lain.layout.cascade.tile,
-    --lain.layout.centerwork,
-    --lain.layout.centerwork.horizontal,
-    --lain.layout.termfair,
-    --lain.layout.termfair.center,
 }
 awful.util.taglist_buttons = awful.util.table.join(
                     awful.button({ }, 1, function(t) t:view_only() end),
@@ -118,16 +111,6 @@ awful.util.tasklist_buttons = awful.util.table.join(
                                               awful.client.focus.byidx(-1)
                                           end))
 
---lain.layout.termfair.nmaster           = 3
---lain.layout.termfair.ncol              = 1
---lain.layout.termfair.center.nmaster    = 3
---lain.layout.termfair.center.ncol       = 1
---lain.layout.cascade.tile.offset_x      = 2
---lain.layout.cascade.tile.offset_y      = 32
---lain.layout.cascade.tile.extra_padding = 5
---lain.layout.cascade.tile.nmaster       = 5
---lain.layout.cascade.tile.ncol          = 2
-
 local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme)
 beautiful.init(theme_path)
 
@@ -153,8 +136,7 @@ awful.util.mymainmenu = freedesktop.menu.build({
 })
 --menubar.utils.terminal = terminal -- Set the Menubar terminal for applications that require it
 
--- {{{ Screen
--- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
+--- SCREEN ---
 screen.connect_signal("property::geometry", function(s)
     -- Wallpaper
     if beautiful.wallpaper then
@@ -166,6 +148,7 @@ screen.connect_signal("property::geometry", function(s)
         gears.wallpaper.maximized(wallpaper, s, true)
     end
 end)
+
 -- Create a wibox for each screen and add it
 awful.screen.connect_for_each_screen(function(s) beautiful.at_screen_connect(s) end)
 -- }}}
@@ -180,10 +163,6 @@ root.buttons(awful.util.table.join(
 
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
-    -- Take a screenshot
-    -- https://github.com/copycat-killer/dots/blob/master/bin/screenshot
-    awful.key({ altkey }, "p", function() os.execute("screenshot") end),
-
     -- Hotkeys
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
@@ -194,26 +173,6 @@ globalkeys = awful.util.table.join(
               {description = "view next", group = "tag"}),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
               {description = "go back", group = "tag"}),
-
-    -- Non-empty tag browsing
-    --awful.key({ altkey }, "Left", function () lain.util.tag_view_nonempty(-1) end,
-    --          {description = "view  previous nonempty", group = "tag"}),
-    --awful.key({ altkey }, "Right", function () lain.util.tag_view_nonempty(1) end,
-    --          {description = "view  previous nonempty", group = "tag"}),
-
-    -- Default client focus
-    awful.key({ altkey,           }, "j",
-        function ()
-            awful.client.focus.byidx( 1)
-        end,
-        {description = "focus next by index", group = "client"}
-    ),
-    awful.key({ altkey,           }, "k",
-        function ()
-            awful.client.focus.byidx(-1)
-        end,
-        {description = "focus previous by index", group = "client"}
-    ),
 
     -- By direction client focus
     awful.key({ modkey }, "j",
@@ -269,17 +228,6 @@ globalkeys = awful.util.table.join(
         end
     end),
 
-    -- On the fly useless gaps change
-    --awful.key({ altkey, "Control" }, "+", function () lain.util.useless_gaps_resize(1) end),
-    --awful.key({ altkey, "Control" }, "-", function () lain.util.useless_gaps_resize(-1) end),
-
-    -- Dynamic tagging
-    --awful.key({ modkey, "Shift" }, "n", function () lain.util.add_tag() end),
-    --awful.key({ modkey, "Shift" }, "r", function () lain.util.rename_tag() end),
-    --awful.key({ modkey, "Shift" }, "Left", function () lain.util.move_tag(1) end),   -- move to next tag
-    --awful.key({ modkey, "Shift" }, "Right", function () lain.util.move_tag(-1) end), -- move to previous tag
-    --awful.key({ modkey, "Shift" }, "d", function () lain.util.delete_tag() end),
-
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
@@ -288,10 +236,6 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
 
-    awful.key({ altkey, "Shift"   }, "l",     function () awful.tag.incmwfact( 0.05)          end,
-              {description = "increase master width factor", group = "layout"}),
-    awful.key({ altkey, "Shift"   }, "h",     function () awful.tag.incmwfact(-0.05)          end,
-              {description = "decrease master width factor", group = "layout"}),
     awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1, nil, true) end,
               {description = "increase the number of master clients", group = "layout"}),
     awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1, nil, true) end,
@@ -319,73 +263,6 @@ globalkeys = awful.util.table.join(
     -- Dropdown application
     awful.key({ modkey, }, "z", function () awful.screen.focused().quake:toggle() end),
 
-    -- Widgets popups
-    --awful.key({ altkey, }, "c", function () lain.widget.calendar.show(7) end),
-    --awful.key({ altkey, }, "h", function () if beautiful.fs then beautiful.fs.show(7) end end),
-    --awful.key({ altkey, }, "w", function () if beautiful.weather then beautiful.weather.show(7) end end),
-
-    -- ALSA volume control
-    awful.key({ altkey }, "Up",
-        function ()
-            os.execute(string.format("amixer -q set %s 1%%+", beautiful.volume.channel))
-            beautiful.volume.update()
-        end),
-    awful.key({ altkey }, "Down",
-        function ()
-            os.execute(string.format("amixer -q set %s 1%%-", beautiful.volume.channel))
-            beautiful.volume.update()
-        end),
-    awful.key({ altkey }, "m",
-        function ()
-            os.execute(string.format("amixer -q set %s toggle", beautiful.volume.togglechannel or beautiful.volume.channel))
-            beautiful.volume.update()
-        end),
-    awful.key({ altkey, "Control" }, "m",
-        function ()
-            os.execute(string.format("amixer -q set %s 100%%", beautiful.volume.channel))
-            beautiful.volume.update()
-        end),
-
-		awful.key({ altkey, "Control" }, "0",
-				function ()
-						os.execute(string.format("amixer -q set %s 0%%", beautiful.volume.channel))
-						beautiful.volume.update()
-				end),
-
-    -- MPD control
-    awful.key({ altkey, "Control" }, "Up",
-        function ()
-            awful.spawn.with_shell("mpc toggle")
-            beautiful.mpd.update()
-        end),
-    awful.key({ altkey, "Control" }, "Down",
-        function ()
-            awful.spawn.with_shell("mpc stop")
-            beautiful.mpd.update()
-        end),
-    awful.key({ altkey, "Control" }, "Left",
-        function ()
-            awful.spawn.with_shell("mpc prev")
-            beautiful.mpd.update()
-        end),
-    awful.key({ altkey, "Control" }, "Right",
-        function ()
-            awful.spawn.with_shell("mpc next")
-            beautiful.mpd.update()
-        end),
-    awful.key({ altkey }, "0",
-        function ()
-            local common = { text = "MPD widget ", position = "top_middle", timeout = 2 }
-            if beautiful.mpd.timer.started then
-                beautiful.mpd.timer:stop()
-                -- common.text = common.text .. lain.util.markup.bold("OFF")
-            else
-                beautiful.mpd.timer:start()
-                -- common.text = common.text .. lain.util.markup.bold("ON")
-            end
-            naughty.notify(common)
-        end),
-
     -- Copy primary to clipboard (terminals to gtk)
     awful.key({ modkey }, "c", function () awful.spawn("xsel | xsel -i -b") end),
     -- Copy clipboard to primary (gtk to terminals)
@@ -395,17 +272,6 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "e", function () awful.spawn(gui_editor) end),
     awful.key({ modkey }, "q", function () awful.spawn(browser) end),
 
-    -- Default
-    --[[ Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
-    --]]
-    --[[ dmenu
-    awful.key({ modkey }, "x", function ()
-        awful.spawn(string.format("dmenu_run -i -fn 'Monospace' -nb '%s' -nf '%s' -sb '%s' -sf '%s'",
-        beautiful.bg_normal, beautiful.fg_normal, beautiful.bg_focus, beautiful.fg_focus))
-		end)
-    --]]
     -- Prompt
     awful.key({ modkey }, "r", function () awful.screen.focused().mypromptbox:run() end,
               {description = "run prompt", group = "launcher"}),
@@ -420,11 +286,9 @@ globalkeys = awful.util.table.join(
                   }
               end,
               {description = "lua execute prompt", group = "awesome"})
-    --]]
-)
+              )
 
-clientkeys = awful.util.table.join(
-    -- awful.key({ altkey, "Shift"   }, "m",      lain.util.magnify_client                         ),
+clientkeys = awful.util.table.join(                       ),
     awful.key({ modkey,           }, "f",
         function (c)
             c.fullscreen = not c.fullscreen
@@ -444,7 +308,6 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "n",
         function (c)
             -- The client currently has the input focus, so it cannot be
-            -- minimized, since minimized clients can't have the focus.
             c.minimized = true
         end ,
         {description = "minimize", group = "client"}),
@@ -457,8 +320,6 @@ clientkeys = awful.util.table.join(
 )
 
 -- Bind all key numbers to tags.
--- Be careful: we use keycodes to make it works on any keyboard layout.
--- This should map on the top row of your keyboard, usually 1 to 9.
 for i = 1, 9 do
     globalkeys = awful.util.table.join(globalkeys,
         -- View tag only.
@@ -513,9 +374,7 @@ clientbuttons = awful.util.table.join(
 
 -- Set keys
 root.keys(globalkeys)
--- }}}
 
--- {{{ Rules
 -- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = {
     -- All clients will match this rule.
@@ -543,9 +402,8 @@ awful.rules.rules = {
     { rule = { class = "Gimp", role = "gimp-image-window" },
           properties = { maximized = true } },
 }
--- }}}
 
--- {{{ Signals
+
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c)
     -- Set the windows at the slave,
@@ -628,4 +486,3 @@ client.connect_signal("focus",
         end
     end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
--- }}}
