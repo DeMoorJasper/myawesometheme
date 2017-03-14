@@ -4,7 +4,6 @@ local awful = require("awful")
 require("awful.autofocus")
 -- Widget and layout library
 local wibox = require("wibox")
-local lain  = require("lain")
 -- Theme handling library
 local beautiful = require("beautiful")
 -- Notification library
@@ -12,7 +11,8 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 
--- LOCAL variables
+-- LOCAL custom variables
+local lain  = require("lain")
 local os = { getenv = os.getenv, setlocale = os.setlocale }
 local confdir = os.getenv("HOME") .. "/.config/awesome"
 local font = "Ubuntu"
@@ -22,6 +22,8 @@ local widget_vol = confdir .. "/icons/spkr.png"
 local widget_netdown = confdir .. "/icons/net_down.png"
 local widget_netup = confdir .. "/icons/net_up.png"
 local widget_mem = confdir .. "/icons/mem.png"
+
+local markup = lain.util.markup
 
 -- Load Debian menu entries
 require("debian.menu")
