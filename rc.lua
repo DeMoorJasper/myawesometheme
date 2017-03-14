@@ -115,13 +115,14 @@ beautiful.init(theme_path)
 
 --- MENU ---
 myawesomemenu = {
+   { "hotkeys", function() return false, hotkeys_popup.show_help end},
    { "manual", terminal .. " -e man awesome" },
    { "edit config", string.format("%s -e %s %s", terminal, editor, awesome.conffile) },
    { "reload", awesome.restart },
    { "lock", terminal .. " -e xscreensaver-command --lock" },
    { "restart", terminal .. " -e sudo shutdown -r now" },
    { "shutdown", terminal .. " -e sudo shutdown -h now" },
-   { "quit", awesome.quit }
+   { "quit", function() awesome.quit() end}
 }
 
 SystemApps = {
