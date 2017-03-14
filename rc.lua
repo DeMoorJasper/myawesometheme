@@ -103,25 +103,39 @@ local function client_menu_toggle_fn()
         end
     end
 end
--- }}}
 
--- {{{ Menu
 -- Create a launcher widget and a main menu
 myawesomemenu = {
    { "hotkeys", function() return false, hotkeys_popup.show_help end},
    { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
-   { "restart", awesome.restart },
+   { "edit config", string.format("%s -e %s %s", terminal, editor, awesome.conffile) },
+   { "reload", awesome.restart },
+   { "lock", terminal .. " -e xscreensaver-command --lock" },
+   { "restart", terminal .. " -e sudo shutdown -r now" },
+   { "shutdown", terminal .. " -e sudo shutdown -h now" },
    { "quit", function() awesome.quit() end}
 }
 
-Applications = {
+SystemApps = {
+    { "Config Panel", "nohup unity-control-center" }
+}
+
+WebApps = {
     { "Firefox", "nohup firefox" }
 }
 
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "Debian", debian.menu.Debian_menu.Debian },
-                                    { "Applications", Applications },
+OfficeApps = {
+    { "Word", "nohup soffice -writer" },
+    { "Excel", "nohup soffice -calc" },
+    { "Powerpoint", "nohup soffice -impress" },
+    { "Thunderbird", "nohup thunderbird" }
+}
+
+awful.util.mymainmenu = awful.menu({ items = {
+                                    { "awesome", myawesomemenu, beautiful.awesome_icon },
+                                    { "System", SystemApps },
+                                    { "Web", WebApps },
+                                    { "Office", OfficeApps },
                                     { "open terminal", terminal }
                                   }
                         })
