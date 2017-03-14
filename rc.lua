@@ -131,7 +131,7 @@ OfficeApps = {
     { "Thunderbird", "nohup thunderbird" }
 }
 
-awful.util.mymainmenu = awful.menu({ items = {
+mymainmenu = awful.menu({ items = {
                                     { "awesome", myawesomemenu, beautiful.awesome_icon },
                                     { "System", SystemApps },
                                     { "Web", WebApps },
