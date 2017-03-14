@@ -16,12 +16,14 @@ local lain  = require("lain")
 local os = { getenv = os.getenv, setlocale = os.setlocale }
 local confdir = os.getenv("HOME") .. "/.config/awesome"
 local font = "Ubuntu"
-local widget_cpu = confdir .. "/icons/cpu.png"
-local widget_batt = confdir .. "/icons/bat.png"
-local widget_vol = confdir .. "/icons/spkr.png"
-local widget_netdown = confdir .. "/icons/net_down.png"
-local widget_netup = confdir .. "/icons/net_up.png"
-local widget_mem = confdir .. "/icons/mem.png"
+local wallpaper = confdir .. "/assets/wallpaper.jpg"
+local icondir = confdir .. "/assets/icons/"
+local widget_cpu = icondir .. "cpu.png"
+local widget_batt = icondir .. "bat.png"
+local widget_vol = icondir .. "spkr.png"
+local widget_netdown = icondir .. "net_down.png"
+local widget_netup = icondir .. "net_up.png"
+local widget_mem = icondir .. "mem.png"
 
 local markup = lain.util.markup
 
@@ -53,9 +55,9 @@ do
 end
 -- }}}
 
--- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(awful.util.get_themes_dir() .. "default/theme.lua")
+
 
 -- This is used later as the default terminal and editor to run.
 terminal = "x-terminal-emulator"
@@ -252,8 +254,7 @@ local tasklist_buttons = awful.util.table.join(
 
 local function set_wallpaper(s)
     -- Wallpaper
-    if beautiful.wallpaper then
-        local wallpaper = beautiful.wallpaper
+    if wallpaper then
         -- If wallpaper is a function, call it with the screen
         if type(wallpaper) == "function" then
             wallpaper = wallpaper(s)
